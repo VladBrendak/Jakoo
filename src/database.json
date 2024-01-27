@@ -1,0 +1,1 @@
+{"db":{"skipLogin":true,"password":"root","user":"postgres","url":"jdbc:postgresql://localhost:5432/jakoo"}}
