@@ -1,4 +1,4 @@
-package com.example.jakoo.controller;
+package com.example.jakoo.controller.task;
 
 import com.example.jakoo.DatabaseConnector;
 import com.example.jakoo.SceneManager;
@@ -76,7 +76,7 @@ public class TaskTabController implements Initializable {
     public void addTask(ActionEvent actionEvent) {
         Map<String, Object> data = new HashMap<>();
         data.put("taskTabControllerScene", this);
-        SceneManager.getInstance((Stage) taskScrollPane.getScene().getWindow()).switchScene("add-task.fxml", data);
+        SceneManager.getInstance((Stage) taskScrollPane.getScene().getWindow()).switchScene("task/add-task.fxml", data);
     }
 
     public void updateTaskView(List<TaskTabItem> newTaskList)
@@ -102,7 +102,7 @@ public class TaskTabController implements Initializable {
             for (int i = 0; i < panes.length; i++) {
                 final int j = i;
 
-                panes[i] = FXMLLoader.load(getClass().getResource("/com/example/jakoo/task-item.fxml"));
+                panes[i] = FXMLLoader.load(getClass().getResource("/com/example/jakoo/task/task-item.fxml"));
 
                 Label title = (Label) panes[i].getChildren().get(0);
                 Label tags = (Label) panes[i].getChildren().get(1);
@@ -135,7 +135,7 @@ public class TaskTabController implements Initializable {
                     data.put("taskTabItem", taskTabItem);
                     data.put("taskTabControllerScene", this);
                     data.put("creationDateTime", creationDateTime);
-                    SceneManager.getInstance((Stage) taskScrollPane.getScene().getWindow()).switchScene("task.fxml", data);
+                    SceneManager.getInstance((Stage) taskScrollPane.getScene().getWindow()).switchScene("task/task.fxml", data);
                 });
 
                 deleteButton.setOnMouseClicked(event -> {

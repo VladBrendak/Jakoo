@@ -1,4 +1,4 @@
-package com.example.jakoo.controller;
+package com.example.jakoo.controller.group;
 
 import com.example.jakoo.DatabaseConnector;
 import com.example.jakoo.SceneManager;
@@ -102,7 +102,7 @@ public class AddEmployeeToGroupController implements SceneManager.DataReceiver, 
         try {
             for (int i = 0; i < panes.length; i++) {
                 final int j = i;
-                panes[i] = FXMLLoader.load(getClass().getResource("/com/example/jakoo/add-employee-to-group-tile.fxml"));
+                panes[i] = FXMLLoader.load(getClass().getResource("/com/example/jakoo/employee/add-employee-to-group-tile.fxml"));
                 Label userName = (Label) panes[i].getChildren().get(0);
 
                 Employee member = groupMembersList.get(j);
@@ -138,7 +138,7 @@ public class AddEmployeeToGroupController implements SceneManager.DataReceiver, 
         try {
             for (int i = 0; i < panes.length; i++) {
                 final int j = i;
-                panes[i] = FXMLLoader.load(getClass().getResource("/com/example/jakoo/add-employee-to-group-tile.fxml"));
+                panes[i] = FXMLLoader.load(getClass().getResource("/com/example/jakoo/employee/add-employee-to-group-tile.fxml"));
                 Label userName = (Label) panes[i].getChildren().get(0);
 
                 Employee employee = employeesList.get(j);

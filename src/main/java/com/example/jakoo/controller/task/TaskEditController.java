@@ -1,4 +1,4 @@
-package com.example.jakoo.controller;
+package com.example.jakoo.controller.task;
 
 import com.example.jakoo.DatabaseConnector;
 import com.example.jakoo.SceneManager;

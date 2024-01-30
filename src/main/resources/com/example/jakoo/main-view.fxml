@@ -13,17 +13,17 @@
         <tabs>
           <Tab text="Employee">
             <content>
-              <fx:include source="employee-tab.fxml" />
+              <fx:include source="employee/employee-tab.fxml" />
             </content>
           </Tab>
           <Tab text="Groups">
             <content>
-              <fx:include source="groups-tab.fxml" />
+              <fx:include source="group/groups-tab.fxml" />
             </content>
           </Tab>
             <Tab text="Task">
               <content>
-                <fx:include source="task-tab.fxml" />
+                <fx:include source="task/task-tab.fxml" />
               </content>
             </Tab>
         </tabs>

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.StackPane?>
 
-<AnchorPane prefHeight="350.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.jakoo.controller.GroupsTabController">
+<AnchorPane prefHeight="350.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.jakoo.controller.group.GroupsTabController">
 
     <children>
         <Label layoutX="392.0" layoutY="14.0" text="Group name" />

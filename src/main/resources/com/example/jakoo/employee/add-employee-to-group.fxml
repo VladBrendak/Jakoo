@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.jakoo.controller.AddEmployeeToGroupController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.jakoo.controller.group.AddEmployeeToGroupController">
    <children>
       <Label fx:id="groupNameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="26.0" layoutY="23.0" prefHeight="27.0" prefWidth="220.0" text="Group Name">
          <font>

@@ -1,4 +1,4 @@
-package com.example.jakoo.controller;
+package com.example.jakoo.controller.group;
 
 import com.example.jakoo.DatabaseConnector;
 import com.example.jakoo.SceneManager;
@@ -17,7 +17,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import java.net.URL;
 import java.util.*;
@@ -66,7 +65,7 @@ public class GroupsTabController implements Initializable {
             for (int i = 0; i < panes.length; i++) {
                 final int j = i;
 
-                panes[i] = FXMLLoader.load(getClass().getResource("/com/example/jakoo/group-item.fxml"));
+                panes[i] = FXMLLoader.load(getClass().getResource("/com/example/jakoo/group/group-item.fxml"));
 
                 Label groupName = (Label) panes[i].getChildren().get(0);
                 Button deleteButton = (Button) panes[i].getChildren().get(1);
@@ -87,7 +86,7 @@ public class GroupsTabController implements Initializable {
                     Map<String, Object> data = new HashMap<>();
                     data.put("groupName", employeeGroup.getName());
                     data.put("groupId", employeeGroup.getGroupId());
-                    SceneManager.getInstance((Stage) groupNameTextField.getScene().getWindow()).switchScene("add-employee-to-group.fxml", data);
+                    SceneManager.getInstance((Stage) groupNameTextField.getScene().getWindow()).switchScene("employee/add-employee-to-group.fxml", data);
                 });
 
                 deleteButton.setOnMouseClicked(event -> {

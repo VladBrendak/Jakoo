@@ -1,4 +1,4 @@
-package com.example.jakoo.controller;
+package com.example.jakoo.controller.employee;
 
 import com.example.jakoo.DatabaseConnector;
 import com.example.jakoo.dao.EmployeeDAO;
@@ -67,7 +67,7 @@ public class EmployeeTabController implements Initializable {
             for (int i = 0; i < hBoxes.length; i++) {
                 final int j = i;
 
-                hBoxes[i] = FXMLLoader.load(getClass().getResource("/com/example/jakoo/employee-item.fxml"));
+                hBoxes[i] = FXMLLoader.load(getClass().getResource("/com/example/jakoo/employee/employee-item.fxml"));
 
                 VBox vBox = (VBox) hBoxes[i].getChildren().get(0);
                 Button deleteButton = (Button) hBoxes[i].getChildren().get(1);

@@ -1,4 +1,4 @@
-package com.example.jakoo.controller;
+package com.example.jakoo.controller.task;
 
 import com.example.jakoo.DatabaseConnector;
 import com.example.jakoo.SceneManager;
@@ -122,7 +122,7 @@ public class TaskController implements SceneManager.DataReceiver, Initializable 
         Map<String, Object> data = new HashMap<>();
         data.put("taskControllerScene", this);
         data.put("taskTabItem", taskTabItem);
-        SceneManager.getInstance((Stage) titleLabel.getScene().getWindow()).switchScene("edit-task.fxml", data);
+        SceneManager.getInstance((Stage) titleLabel.getScene().getWindow()).switchScene("task/edit-task.fxml", data);
     }
 
     public void updateTaskInfo()
