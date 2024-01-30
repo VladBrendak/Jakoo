@@ -26,6 +26,7 @@
         <TextField fx:id="nicknameTextField" layoutX="388.0" layoutY="31.0" prefHeight="25.0" prefWidth="198.0" />
         <TextArea fx:id="descriptionTextArea" layoutX="389.0" layoutY="85.0" prefHeight="102.0" prefWidth="197.0" />
         <Label layoutX="392.0" layoutY="68.0" text="Description" />
+      <Button layoutX="449.0" layoutY="293.0" mnemonicParsing="false" onAction="#makeReport" text="Make Report" />
     </children>
 
 </AnchorPane>

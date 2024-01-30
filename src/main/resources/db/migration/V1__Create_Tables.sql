@@ -17,15 +17,16 @@ CREATE TABLE IF NOT EXISTS Note (
 -- Створення таблиці Workdays та зовнішнього ключа
 CREATE TABLE IF NOT EXISTS Workdays (
     workday_id SERIAL PRIMARY KEY,
-    status VARCHAR(20) CHECK (status IN ('present', 'missing', 'valid reason', 'day off', 'sick leave'))
+    status VARCHAR(20) CHECK (status IN ('present', 'part-time', 'missing', 'valid reason', 'day off', 'inactive'))
 );
 
 INSERT INTO Workdays (status) VALUES
     ('present'),
+    ('part-time'),
     ('missing'),
     ('valid reason'),
     ('day off'),
-    ('sick leave');
+    ('inactive');
 
 -- Створення таблиці Status та зовнішнього ключа
 CREATE TABLE IF NOT EXISTS Status (
@@ -58,7 +59,8 @@ CREATE TABLE IF NOT EXISTS workdays_note (
 	employee INT,
     workday INT,
     note INT,
-	work_time INT,
+	paid_additional_time INT,
+	unpaid_additional_time INT,
 	date TIMESTAMP,
 	CONSTRAINT fk_emloyee FOREIGN KEY (employee) REFERENCES Employee (employee_id),
     CONSTRAINT fk_workday FOREIGN KEY (workday) REFERENCES Workdays (workday_id),

@@ -167,6 +167,7 @@ public class EmployeeDAO {
             preparedStatement.setString(2, employee.getDescription());
 
             preparedStatement.executeUpdate();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

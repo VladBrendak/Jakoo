@@ -32,7 +32,8 @@ public class WorkdaysNoteDAO {
                 workdaysNote.setEmloyeeId(resultSet.getLong("employee"));
                 workdaysNote.setWorkdayId(resultSet.getLong("workday"));
                 workdaysNote.setNoteId(resultSet.getLong("note"));
-                workdaysNote.setWorkTime(resultSet.getLong("work_time"));
+                workdaysNote.setPaid_additional_time(resultSet.getLong("paid_additional_time"));
+                workdaysNote.setUnpaid_additional_time(resultSet.getLong("unpaid_additional_time"));
                 workdaysNote.setDate(resultSet.getTimestamp("date"));
                 workdaysNotesList.add(workdaysNote);
             }
@@ -59,7 +60,8 @@ public class WorkdaysNoteDAO {
                     workdaysNote.setEmloyeeId(resultSet.getLong("employee"));
                     workdaysNote.setWorkdayId(resultSet.getLong("workday"));
                     workdaysNote.setNoteId(resultSet.getLong("note"));
-                    workdaysNote.setWorkTime(resultSet.getLong("work_time"));
+                    workdaysNote.setPaid_additional_time(resultSet.getLong("paid_additional_time"));
+                    workdaysNote.setUnpaid_additional_time(resultSet.getLong("unpaid_additional_time"));
                     workdaysNote.setDate(resultSet.getTimestamp("date"));
                 }
             }
@@ -71,7 +73,7 @@ public class WorkdaysNoteDAO {
     }
 
     public void addWorkdaysNote(WorkdaysNote workdaysNote) {
-        String sql = "INSERT INTO workdays_note (employee, workday, note, work_time, date) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO workdays_note (employee, workday, note, paid_additional_time, paid_additional_time, date) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = connector.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -79,17 +81,19 @@ public class WorkdaysNoteDAO {
             preparedStatement.setLong(1, workdaysNote.getEmloyeeId());
             preparedStatement.setLong(2, workdaysNote.getWorkdayId());
             preparedStatement.setLong(3, workdaysNote.getNoteId());
-            preparedStatement.setLong(4, workdaysNote.getWorkTime());
-            preparedStatement.setTimestamp(5, workdaysNote.getDate());
+            preparedStatement.setLong(4, workdaysNote.getPaid_additional_time());
+            preparedStatement.setLong(5, workdaysNote.getUnpaid_additional_time());
+            preparedStatement.setTimestamp(6, workdaysNote.getDate());
 
             preparedStatement.executeUpdate();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     public void updateWorkdaysNote(WorkdaysNote workdaysNote) {
-        String sql = "UPDATE workdays_note SET employee = ?, workday = ?, note = ?, work_time = ?, date = ? WHERE workdays_note_id = ?";
+        String sql = "UPDATE workdays_note SET employee = ?, workday = ?, note = ?, paid_additional_time = ?, unpaid_additional_time = ?, date = ? WHERE workdays_note_id = ?";
 
         try (Connection connection = connector.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -97,9 +101,10 @@ public class WorkdaysNoteDAO {
             preparedStatement.setLong(1, workdaysNote.getEmloyeeId());
             preparedStatement.setLong(2, workdaysNote.getWorkdayId());
             preparedStatement.setLong(3, workdaysNote.getNoteId());
-            preparedStatement.setLong(4, workdaysNote.getWorkTime());
-            preparedStatement.setTimestamp(5, workdaysNote.getDate());
-            preparedStatement.setLong(6, workdaysNote.getWorkdaysNoteId());
+            preparedStatement.setLong(4, workdaysNote.getPaid_additional_time());
+            preparedStatement.setLong(5, workdaysNote.getUnpaid_additional_time());
+            preparedStatement.setTimestamp(6, workdaysNote.getDate());
+            preparedStatement.setLong(7, workdaysNote.getWorkdaysNoteId());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {

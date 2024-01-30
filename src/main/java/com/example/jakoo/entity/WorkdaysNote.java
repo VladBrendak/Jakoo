@@ -7,7 +7,8 @@ public class WorkdaysNote {
     private Long emloyeeId;
     private Long workdayId;
     private Long noteId;
-    private Long workTime;
+    private Long paid_additional_time;
+    private Long unpaid_additional_time;
     private Timestamp date;
 
     public Long getWorkdaysNoteId() {
@@ -42,12 +43,20 @@ public class WorkdaysNote {
         this.noteId = noteId;
     }
 
-    public Long getWorkTime() {
-        return workTime;
+    public Long getPaid_additional_time() {
+        return paid_additional_time;
     }
 
-    public void setWorkTime(Long workTime) {
-        this.workTime = workTime;
+    public void setPaid_additional_time(Long paid_additional_time) {
+        this.paid_additional_time = paid_additional_time;
+    }
+
+    public Long getUnpaid_additional_time() {
+        return unpaid_additional_time;
+    }
+
+    public void setUnpaid_additional_time(Long unpaid_additional_time) {
+        this.unpaid_additional_time = unpaid_additional_time;
     }
 
     public Timestamp getDate() {

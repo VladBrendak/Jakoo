@@ -1,6 +1,7 @@
 package com.example.jakoo.controller.employee;
 
 import com.example.jakoo.DatabaseConnector;
+import com.example.jakoo.SceneManager;
 import com.example.jakoo.dao.EmployeeDAO;
 import com.example.jakoo.entity.Employee;
 import javafx.beans.value.ChangeListener;
@@ -16,8 +17,10 @@ import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -142,5 +145,9 @@ public class EmployeeTabController implements Initializable {
             employeeDAO.addEmployee(employee);
             UpdateEmployeeListView();
         }
+    }
+
+    public void makeReport() {
+        SceneManager.getInstance((Stage) employeeScrollPane.getScene().getWindow()).switchScene("employee/report-employee.fxml", new HashMap<>());
     }
 }
