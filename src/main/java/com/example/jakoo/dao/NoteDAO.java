@@ -3,10 +3,7 @@ package com.example.jakoo.dao;
 import com.example.jakoo.DatabaseConnector;
 import com.example.jakoo.entity.Note;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +36,32 @@ public class NoteDAO {
         }
 
         return notes;
+    }
+
+    public Note getNoteByIdAndDate(Long employeeId, Timestamp date) {
+        String sql = "SELECT * FROM Note WHERE employee = ? AND date = ?";
+        Note note = null;
+
+        try (Connection connection = connector.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)
+            ) {
+
+            preparedStatement.setLong(1, employeeId);
+            preparedStatement.setTimestamp(2, date);
+
+            try ( ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    note = new Note();
+                    note.setNoteId(resultSet.getLong("note_id"));
+                    note.setEmloyeeId(resultSet.getLong("employee"));
+                    note.setText(resultSet.getString("text"));
+                    note.setDate(resultSet.getTimestamp("date"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return note;
     }
 
     public Long addNote(Note note) {
@@ -100,11 +123,11 @@ public class NoteDAO {
                         }
                     } else {
                         // Якщо запис існує, виконати оновлення
-                        int noteId = resultSet.getInt("note_id");
+                        long noteId = resultSet.getLong("note_id");
                         try (PreparedStatement updateStatement = connection.prepareStatement(sqlUpdate)) {
                             updateStatement.setLong(1, note.getEmloyeeId());
                             updateStatement.setString(2, note.getText());
-                            updateStatement.setInt(3, noteId);
+                            updateStatement.setLong(3, noteId);
                             updateStatement.executeUpdate();
                         }
                     }

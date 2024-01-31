@@ -9,6 +9,7 @@ import com.example.jakoo.dao.WorkdaysNoteDAO;
 import com.example.jakoo.entity.Employee;
 import com.example.jakoo.entity.Note;
 import com.example.jakoo.entity.Workdays;
+import com.example.jakoo.entity.WorkdaysNote;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -27,6 +28,7 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ReportController implements Initializable {
@@ -52,7 +54,8 @@ public class ReportController implements Initializable {
     private Font font;
     private Insets insets;
     private static int lastSelectedEmployeeId = 0;
-    private static long currentSelectedEmployeeId;
+    private static long currentSelectedEmployeeId = 0;
+    private List<Workdays> workdays;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -79,7 +82,11 @@ public class ReportController implements Initializable {
 
         datePicker.setValue(LocalDate.now());
 
-        List<Workdays> workdays = workdaysDAO.getAllWorkdays();
+        datePicker.setOnAction(event -> {
+            updateEmployeeReportInfo();
+        });
+
+        workdays = workdaysDAO.getAllWorkdays();
         workdaysComboBox.setItems(FXCollections.observableArrayList(workdays));
         workdaysComboBox.setValue(workdays.stream().filter(e -> Objects.equals(e.getWorkdayId(), 1L)).findFirst().get());
 
@@ -132,7 +139,7 @@ public class ReportController implements Initializable {
                 lastSelectedEmployeeId = j;
                 currentSelectedEmployeeId = employee.getEmployeeId();
                 labels[j].setStyle("-fx-background-color : #D3D3D3");
-                updateEmployeReportInfo(employee);
+                updateEmployeeReportInfo();
             });
         }
     }
@@ -148,12 +155,39 @@ public class ReportController implements Initializable {
         return l;
     }
 
-    public void updateEmployeReportInfo(Employee e) {
-
+    public void updateEmployeeReportInfo() {
+        Timestamp date = Timestamp.valueOf(datePicker.getValue().atStartOfDay());
+        if(currentSelectedEmployeeId > 0) {
+            WorkdaysNote workdaysNote = workdaysNoteDAO.getWorkdayNoteByIdAndDate(currentSelectedEmployeeId, date);
+            if(workdaysNote != null) {
+                Optional<Workdays> workdaysOptional = workdays.stream().filter(e -> Objects.equals(e.getWorkdayId(), workdaysNote.getWorkdayId())).findFirst();
+                workdaysOptional.ifPresent(value -> workdaysComboBox.setValue(value));
+                workNoteTextArea.setText(workdaysNote.getNote());
+                additionalTimeTextField.setText(workdaysNote.getPaid_additional_time().toString());
+                additionalTimeNotPayedTextField.setText(workdaysNote.getUnpaid_additional_time().toString());
+            } else {
+                workdaysComboBox.setValue(workdays.stream().filter(e -> Objects.equals(e.getWorkdayId(), 1L)).findFirst().get());
+                workNoteTextArea.clear();
+                additionalTimeTextField.clear();
+                additionalTimeNotPayedTextField.clear();
+            }
+            Note note = noteDAO.getNoteByIdAndDate(currentSelectedEmployeeId, date);
+            if (note != null) {
+                noteTextArea.setText(note.getText());
+            }
+            else { noteTextArea.clear();}
+        }
     }
 
     public void saveReport() {
-
+        WorkdaysNote workdaysNote = new WorkdaysNote();
+        workdaysNote.setEmloyeeId(currentSelectedEmployeeId);
+        workdaysNote.setWorkdayId(workdaysComboBox.getValue().getWorkdayId());
+        workdaysNote.setNote(workNoteTextArea.getText());
+        workdaysNote.setPaid_additional_time(Long.parseLong(additionalTimeTextField.getText()));
+        workdaysNote.setUnpaid_additional_time(Long.parseLong(additionalTimeNotPayedTextField.getText()));
+        workdaysNote.setDate(Timestamp.valueOf(datePicker.getValue().atStartOfDay()));
+        workdaysNoteDAO.upsertWorkdaysNote(workdaysNote);
     }
 
     public void saveNote() {

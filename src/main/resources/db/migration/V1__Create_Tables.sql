@@ -58,13 +58,14 @@ CREATE TABLE IF NOT EXISTS workdays_note (
     workdays_note_id SERIAL PRIMARY KEY,
 	employee INT,
     workday INT,
-    note INT,
+    -- note INT,
+    note TEXT,
 	paid_additional_time INT,
 	unpaid_additional_time INT,
 	date TIMESTAMP,
 	CONSTRAINT fk_emloyee FOREIGN KEY (employee) REFERENCES Employee (employee_id),
-    CONSTRAINT fk_workday FOREIGN KEY (workday) REFERENCES Workdays (workday_id),
-    CONSTRAINT fk_note FOREIGN KEY (note) REFERENCES Note (note_id)
+    CONSTRAINT fk_workday FOREIGN KEY (workday) REFERENCES Workdays (workday_id)
+    --CONSTRAINT fk_note FOREIGN KEY (note) REFERENCES Note (note_id)
 );
 
 -- Створення таблиці EmployeeGroup

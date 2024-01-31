@@ -1,15 +1,29 @@
 package com.example.jakoo.entity;
 
 import java.sql.Timestamp;
+import java.util.Objects;
 
 public class WorkdaysNote {
     private Long workdaysNoteId;
     private Long emloyeeId;
     private Long workdayId;
-    private Long noteId;
+    private String note;
     private Long paid_additional_time;
     private Long unpaid_additional_time;
     private Timestamp date;
+
+    public WorkdaysNote() {
+    }
+
+    public WorkdaysNote(Long workdaysNoteId, Long emloyeeId, Long workdayId, String note, Long paid_additional_time, Long unpaid_additional_time, Timestamp date) {
+        this.workdaysNoteId = workdaysNoteId;
+        this.emloyeeId = emloyeeId;
+        this.workdayId = workdayId;
+        this.note = note;
+        this.paid_additional_time = paid_additional_time;
+        this.unpaid_additional_time = unpaid_additional_time;
+        this.date = date;
+    }
 
     public Long getWorkdaysNoteId() {
         return workdaysNoteId;
@@ -35,12 +49,12 @@ public class WorkdaysNote {
         this.workdayId = workdayId;
     }
 
-    public Long getNoteId() {
-        return noteId;
+    public String getNote() {
+        return note;
     }
 
-    public void setNoteId(Long noteId) {
-        this.noteId = noteId;
+    public void setNote(String note) {
+        this.note = note;
     }
 
     public Long getPaid_additional_time() {
@@ -65,6 +79,11 @@ public class WorkdaysNote {
 
     public void setDate(Timestamp date) {
         this.date = date;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(emloyeeId);
     }
 }
 
